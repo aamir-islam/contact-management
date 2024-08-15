@@ -1,6 +1,10 @@
 import React from "react";
-// import { Line } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
+import { Line } from "react-chartjs-2";
 import { useCovidData } from "../hooks/useCovidData";
+
+// Register Chart.js components
+Chart.register(...registerables);
 
 const LineGraph: React.FC = () => {
   const { historicalData } = useCovidData();
@@ -8,24 +12,34 @@ const LineGraph: React.FC = () => {
   if (historicalData.isLoading) return <div>Loading...</div>;
   if (historicalData.isError) return <div>Error loading data</div>;
 
-  //   const chartData = {
-  //     labels: Object.keys(historicalData.data.cases),
-  //     datasets: [
-  //       {
-  //         label: "Cases Over Time",
-  //         data: Object.values(historicalData.data.cases),
-  //         borderColor: "rgba(75,192,192,1)",
-  //         fill: false,
-  //       },
-  //     ],
-  //   };
+  // Ensure historicalData.data is defined
+  if (!historicalData.data) return <div>No data available</div>;
 
-  console.log(historicalData.data);
-  return (
-    <div>
-      <h1>data</h1>
-    </div>
-  );
+  const chartData = {
+    labels: Object.keys(historicalData.data.cases),
+    datasets: [
+      {
+        label: "Cases Over Time",
+        data: Object.values(historicalData.data.cases),
+        borderColor: "rgba(75,192,192,1)",
+        fill: false,
+      },
+      {
+        label: "Deaths Over Time",
+        data: Object.values(historicalData.data.deaths),
+        borderColor: "rgba(245, 0, 1, 0.8)",
+        fill: false,
+      },
+      {
+        label: "Recovered Over Time",
+        data: Object.values(historicalData.data.recovered),
+        borderColor: "rgba(5, 254, 1, 0.8)",
+        fill: false,
+      },
+    ],
+  };
+
+  return <Line data={chartData} />;
 };
 
 export default LineGraph;

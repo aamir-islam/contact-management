@@ -1,3 +1,4 @@
+import CovidMap from "../../components/CovidMap";
 import LineGraph from "../../components/LineGraph";
 
 export const Chart = () => {
@@ -5,6 +6,7 @@ export const Chart = () => {
     <div>
       <h1>Chart </h1>
       <LineGraph />
+      <CovidMap />
     </div>
   );
 };
