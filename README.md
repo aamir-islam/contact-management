@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Contacts Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
 
-Currently, two official plugins are available:
+This project is a Contacts Management application built with React and Vite. It provides functionalities for managing contacts and displaying data in a user-friendly interface. The app also shows COVID records using charts, allowing users to visualize the data effectively.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Objectives
 
-## Expanding the ESLint configuration
+#### Contacts Page
+- **Add New Contacts**: The app features a form for adding new contacts.
+- **Display Contacts List**: A list of all added contacts is displayed.
+- **View Contact Details**: Each contact includes a button to view its details.
+- **Edit and Delete Contacts**: Users can edit or delete existing contacts.
+- **State Management**: Redux is utilized to store contact data.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### Charts and Maps Page
+- **Dashboard**: A simple dashboard is built that includes:
+  - A **Line Graph** displaying fluctuations in COVID cases over time.
+  - A **React Leaflet Map** with markers that show:
+    - Country Name
+    - Total Number of Active Cases
+    - Total Number of Recovered Cases
+    - Total Number of Deaths
+    - All data presented in popups for easy access.
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To get a local copy up and running follow these simple steps.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Prerequisites
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Clone the Repository
+
+```bash
+git clone https://github.com/aamir-islam/contact-management.git
+
+
+cd contact-management
+npm install
+
+## Run the Project
+
+npm run dev
+
