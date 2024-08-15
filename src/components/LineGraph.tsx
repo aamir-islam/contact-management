@@ -3,7 +3,6 @@ import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useCovidData } from "../hooks/useCovidData";
 
-// Register Chart.js components
 Chart.register(...registerables);
 
 const LineGraph: React.FC = () => {
