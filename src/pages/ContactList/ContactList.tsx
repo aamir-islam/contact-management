@@ -33,40 +33,40 @@ export const ContactList = () => {
   };
 
   return (
-    <div className="flex flex-col items-center ">
-      <h1 className="text-3xl font-bold text-center my-8">Contact List</h1>
-      {users ? (
-        <>
-          <div className="flex-grow flex flex-col items-center w-full px-4">
-            <div className="grid gap-4 justify-center w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {users.map((user) => (
-                <UserCard
-                  key={user.id}
-                  user={user}
-                  onEdit={() => handleEditUser(user)}
-                  onDelete={() => handleRemoveUser(user.id)}
-                />
-              ))}
-            </div>
+    <div className="mt-10 flex flex-col items-center ">
+      {users && users.length > 0 ? ( // Check if users exist and has length
+        <div className="flex-grow flex flex-col items-center w-full px-4">
+          <div className="grid gap-4 justify-center w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {users.map((user) => (
+              <UserCard
+                key={user.id}
+                user={user}
+                onEdit={() => handleEditUser(user)}
+                onDelete={() => handleRemoveUser(user.id)}
+              />
+            ))}
           </div>
-
-          <ContactModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            onSave={editingUser ? handleUpdateUser : undefined}
-            initialData={editingUser}
-          />
-        </>
+        </div>
       ) : (
-        <div>
-          <h1 className="text-3xl font-bold text-center my-8">
+        <div className=" border border-gray-300 rounded-lg p-6 bg-gray-50">
+          <h1 className="text-3xl font-bold text-center my-4">
             No contact found
           </h1>
+          <p className="text-center">
+            Please add contact from the create contact button.
+          </p>
         </div>
       )}
+
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={editingUser ? handleUpdateUser : undefined}
+        initialData={editingUser}
+      />
       <div className="mt-8">
         <Button onClick={handleOpenModal} variant="primary">
-          Add Contact
+          Create Contact
         </Button>
       </div>
     </div>
