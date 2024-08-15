@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { ContactList } from "../ContactList/ContactList";
 import { Chart } from "../Chart/Chart";
 
-export const MainContent = () => {
+const MainContent: React.FC = () => {
   return (
     <div className="flex-grow">
       <Routes>
@@ -13,3 +13,5 @@ export const MainContent = () => {
     </div>
   );
 };
+
+export default MainContent;

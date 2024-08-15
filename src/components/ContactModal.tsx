@@ -17,20 +17,42 @@ const ContactModal: React.FC<ModalProps> = ({
 }) => {
   const { addUser } = useUserStore();
   const [user, setUser] = useState({
-    id: Date.now(),
-    firstName: "",
-    lastName: "",
-    status: "",
-  });
+      id: Date.now(),
+      firstName: "",
+      lastName: "",
+      status: "",
+    }),
+    [errors, setErrors] = useState({
+      firstName: "",
+      lastName: "",
+      status: "",
+    }),
+    [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    status: "",
-  });
-
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-
+  const validate = () => {
+      const newErrors = {
+        firstName: user.firstName.trim() ? "" : "First name is required",
+        lastName: user.lastName.trim() ? "" : "Last name is required",
+        status: user.status.trim() ? "" : "Status is required",
+      };
+      setErrors(newErrors);
+      return !Object.values(newErrors).some((error) => error !== "");
+    },
+    handleSave = () => {
+      if (validate()) {
+        if (onSave) {
+          onSave(user.id, user); // Call onSave with the updated user data
+        } else {
+          addUser(user);
+        }
+        setUser({ id: Date.now(), firstName: "", lastName: "", status: "" }); // Reset form
+        onClose();
+      }
+    },
+    handleCloseModal = () => {
+      setUser({ id: Date.now(), firstName: "", lastName: "", status: "" }); // Reset form
+      onClose();
+    };
   useEffect(() => {
     if (initialData) {
       setUser(initialData); // Populate the form with the initial data when editing
@@ -43,33 +65,6 @@ const ContactModal: React.FC<ModalProps> = ({
       !user.firstName.trim() || !user.lastName.trim() || !user.status.trim();
     setIsSaveDisabled(isDisabled);
   }, [user]);
-
-  const validate = () => {
-    const newErrors = {
-      firstName: user.firstName.trim() ? "" : "First name is required",
-      lastName: user.lastName.trim() ? "" : "Last name is required",
-      status: user.status.trim() ? "" : "Status is required",
-    };
-    setErrors(newErrors);
-    return !Object.values(newErrors).some((error) => error !== "");
-  };
-
-  const handleSave = () => {
-    if (validate()) {
-      if (onSave) {
-        onSave(user.id, user); // Call onSave with the updated user data
-      } else {
-        addUser(user);
-      }
-      setUser({ id: Date.now(), firstName: "", lastName: "", status: "" }); // Reset form
-      onClose();
-    }
-  };
-
-  const handleCloseModal = () => {
-    setUser({ id: Date.now(), firstName: "", lastName: "", status: "" }); // Reset form
-    onClose();
-  };
 
   if (!isOpen) return null;
 

@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import { User, useUserStore } from "../../store/useUserStore";
 import UserCard from "../../components/UserCard";
 
-export const ContactList = () => {
+export const ContactList: React.FC = () => {
   const { users, updateUser, removeUser } = useUserStore();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

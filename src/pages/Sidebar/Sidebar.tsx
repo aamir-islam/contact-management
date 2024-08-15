@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const Sidebar = () => {
+export const Sidebar: React.FC = () => {
   return (
     <div className="w-64 bg-gray-900 text-white p-6 shadow-lg">
       <div className="text-3xl font-bold mb-8 text-center">MyApp</div>

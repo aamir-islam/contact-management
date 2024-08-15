@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-export const Header = () => {
+const Header: React.FC = () => {
   const { pathname } = useLocation();
 
   return (
@@ -9,3 +9,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;
