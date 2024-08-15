@@ -39,7 +39,17 @@ const LineGraph: React.FC = () => {
     ],
   };
 
-  return <Line data={chartData} />;
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false, // Allow the chart to fill its container
+  };
+
+  return (
+    <div className="relative h-80 w-full">
+      {/* Set height and width with Tailwind */}
+      <Line data={chartData} options={options} />
+    </div>
+  );
 };
 
 export default LineGraph;
